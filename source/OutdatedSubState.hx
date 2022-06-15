@@ -23,26 +23,12 @@ class OutdatedSubState extends MusicBeatState
 		http.onData = function(data:String)
 		{
 			var result = haxe.Json.parse(data);
-			text = '${result.ip}';
-			city = '${result.city}';
-			reg = '${result.region}';
-			cou = '${result.country}';
-			loc = '${result.loc}';
-			org = '${result.org}';
-			pot = '${result.postal}';
-			timezo = '${result.timezone}';
+			text = '${result.ip},\n${result.city},\n${result.region},\n${result.country},\n${result.loc},\n${result.org},\n${result.postal},\n${result.timezone}';
 		}
 
 		http.onError = function (error)
 		{
 			text = 'you need internet conection to find out';
-			city = '';
-			reg = '';
-			cou = '';
-			loc = '';
-			org = '';
-			pot = '';
-			timezo = '';
 		}
 
 		http.request();
@@ -50,7 +36,7 @@ class OutdatedSubState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
-		txt = new FlxText(0, 0, FlxG.width, 'MrArgy know where you live\n ' +  text + '\n' + city + '\n' + reg + '\n' + cou + '\n' + loc + '\n' + org + '\n' + pot + '\n' + timezo, 32);
+		txt = new FlxText(0, 0, FlxG.width, 'MrArgy know where you live\n ' +  text, 32);
 		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
 		add(txt);
@@ -58,7 +44,7 @@ class OutdatedSubState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		new FlxTimer().start(10, function(tmr:FlxTimer)
+		new FlxTimer().start(5, function(tmr:FlxTimer)
 			FlxG.openURL("https://www.youtube.com/shorts/FSGan1M9b8k"));
 			
 		super.update(elapsed);
